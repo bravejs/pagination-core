@@ -70,6 +70,8 @@ interface Props extends Options {
 
 ### Pagination
 
+Pagination instance and methods
+
 ```typescript
 declare class Pagination {
   pages: number[]; // List of page numbers, 0 is a collapsed item

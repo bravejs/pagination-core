@@ -46,7 +46,7 @@ interface Options {
   // 总条目数量，默认 0
   total: number;
 
-  // 每页条目树立，默认 50
+  // 每页条目数量，默认 50
   pageSize: number;
 
   // 最大页码长度, 
@@ -67,6 +67,8 @@ interface Props extends Options {
 ```
 
 ### Pagination
+
+实例和方法
 
 ```typescript
 declare class Pagination {
