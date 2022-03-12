@@ -1,6 +1,6 @@
 {
   "name": "@bravejs/pagination",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pagination core",
   "main": "dist/pagination.umd.js",
   "module": "dist/pagination.esm.js",
