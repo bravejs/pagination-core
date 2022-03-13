@@ -15,7 +15,7 @@
     <div>Current: <input name="current" type="number" min="1"></div>
     <div>Total: <input name="total" type="number" min="0"></div>
     <div>Page size: <input name="pageSize" type="number" min="0"></div>
-    <div>Max length: <input name="maxLength" type="number" min="0"></div>
+    <div>Max length: <input name="maxLength" type="number" min="1"></div>
 </form>
 
 <div class="pagination">
@@ -27,22 +27,25 @@
 <script src="../dist/index.umd.js"></script>
 <script>
 
-  function update () {
-    const list = el.children[1]
-    const props = pagination.props
-    list.innerHTML = ''
-    pagination.pages.forEach((page) => {
+  function update (pages, props) {
+    listEl.innerHTML = ''
+
+    pages.forEach((page) => {
       const li = document.createElement('li')
+
       li.dataset.index = page
       li.innerText = page || '...'
+
       if (page === props.current) {
         li.className = 'active'
       }
-      list.appendChild(li)
+
+      listEl.appendChild(li)
     })
 
     Object.keys(props).forEach((key) => {
       const input = form.elements[key]
+
       if (input) {
         input.value = props[key]
       }
@@ -50,33 +53,32 @@
   }
 
   const el = document.querySelector('.pagination')
+  const listEl = el.children[1]
   const form = document.querySelector('form')
+
   const pagination = new Pagination({
     total: 500
-  })
-
-  update()
+  }, update)
 
   form.addEventListener('input', (evt) => {
     pagination.set({
       [evt.target.name]: +evt.target.value
     })
-    update()
   })
 
   el.addEventListener('click', (evt) => {
     const target = evt.target
+
     switch (target.tagName) {
       case 'BUTTON': {
         pagination[target.dataset.action]()
-        update()
         break
       }
+
       case 'LI': {
         const page = +target.dataset.index
         if (page) {
           pagination.to(page)
-          update()
         }
         break
       }

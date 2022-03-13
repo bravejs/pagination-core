@@ -9,6 +9,8 @@ export interface Props extends Options {
   totalPages: number
 }
 
+export type Callback = (pages: number[], props: Props) => void;
+
 function getSafeIndex (index: number, totalPages: number) {
   return index < 1 ? 1 : index > totalPages ? totalPages : index
 }
@@ -17,7 +19,9 @@ class Pagination {
   pages!: number[]
   props: Props
 
-  constructor (options: Partial<Options>) {
+  private _cb?: Callback
+
+  constructor (options: Partial<Options>, callback?: Callback) {
     this.props = {
       current: 1,
       total: 0,
@@ -25,6 +29,7 @@ class Pagination {
       maxLength: 9,
       totalPages: 0
     }
+    this._cb = callback
     this.set(options)
   }
 
@@ -53,7 +58,7 @@ class Pagination {
   }
 
   private _init () {
-    const { props, pages } = this
+    const { props, pages, _cb } = this
     const { current, total, pageSize, maxLength } = props
     const totalPages = total ? Math.ceil(total / pageSize) : 1
     const length = totalPages > maxLength ? maxLength : totalPages
@@ -91,6 +96,10 @@ class Pagination {
 
     props.current = activeIndex
     props.totalPages = totalPages
+
+    if (_cb) {
+      _cb(pages, props)
+    }
   }
 }
 
