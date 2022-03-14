@@ -1,14 +1,14 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Pagination = factory());
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.PaginationCore = factory());
 })(this, (function () { 'use strict';
 
     function getSafeIndex(index, totalPages) {
         return index < 1 ? 1 : index > totalPages ? totalPages : index;
     }
-    var Pagination = /** @class */ (function () {
-        function Pagination(options, callback) {
+    var PaginationCore = /** @class */ (function () {
+        function PaginationCore(options, callback) {
             this.props = {
                 current: 1,
                 total: 0,
@@ -19,19 +19,19 @@
             this._cb = callback;
             this.set(options);
         }
-        Pagination.prototype.prev = function () {
+        PaginationCore.prototype.prev = function () {
             this.to(this.props.current - 1);
         };
-        Pagination.prototype.next = function () {
+        PaginationCore.prototype.next = function () {
             this.to(this.props.current + 1);
         };
-        Pagination.prototype.to = function (page) {
+        PaginationCore.prototype.to = function (page) {
             var _a = this.props, current = _a.current, totalPages = _a.totalPages;
             if (getSafeIndex(page, totalPages) !== current) {
                 this.set({ current: page });
             }
         };
-        Pagination.prototype.set = function (options) {
+        PaginationCore.prototype.set = function (options) {
             var key;
             for (key in options) {
                 this.props[key] = options[key];
@@ -39,7 +39,7 @@
             this.pages = [];
             this._init();
         };
-        Pagination.prototype._init = function () {
+        PaginationCore.prototype._init = function () {
             var _a = this, props = _a.props, pages = _a.pages, _cb = _a._cb;
             var current = props.current, total = props.total, pageSize = props.pageSize, maxLength = props.maxLength;
             var totalPages = total ? Math.ceil(total / pageSize) : 1;
@@ -76,9 +76,9 @@
                 _cb(pages, props);
             }
         };
-        return Pagination;
+        return PaginationCore;
     }());
 
-    return Pagination;
+    return PaginationCore;
 
 }));

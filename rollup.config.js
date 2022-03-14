@@ -2,7 +2,7 @@ import path from 'path'
 import typescript from '@rollup/plugin-typescript'
 import { terser } from 'rollup-plugin-terser'
 
-const libName = 'Pagination'
+const libName = 'PaginationCore'
 const outputTypes = ['umd', 'esm']
 
 outputTypes.forEach((type) => {

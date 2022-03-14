@@ -15,7 +15,7 @@ function getSafeIndex (index: number, totalPages: number) {
   return index < 1 ? 1 : index > totalPages ? totalPages : index
 }
 
-class Pagination {
+class PaginationCore {
   pages!: number[]
   props: Props
 
@@ -103,4 +103,4 @@ class Pagination {
   }
 }
 
-export default Pagination
+export default PaginationCore

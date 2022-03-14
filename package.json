@@ -1,6 +1,6 @@
 {
-  "name": "@bravejs/pagination",
-  "version": "0.0.4",
+  "name": "pagination-core",
+  "version": "0.0.5",
   "description": "Pagination core",
   "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
@@ -16,18 +16,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bravejs/pagination.git"
+    "url": "git+https://github.com/bravejs/pagination-core.git"
   },
   "keywords": [
     "pagination",
+    "core",
     "pager"
   ],
   "author": "shixianqin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bravejs/pagination/issues"
+    "url": "https://github.com/bravejs/pagination-core/issues"
   },
-  "homepage": "https://github.com/bravejs/pagination#readme",
+  "homepage": "https://github.com/bravejs/pagination-core#readme",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.1",
     "rollup": "^2.70.0",

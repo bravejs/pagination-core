@@ -1,8 +1,8 @@
-# @bravejs/pagination
+# Pagination core
 
 这是分页组件的基类。用于创建分页组件所需的最基本数据，以便它可以应用于任何场景或框架。基于这些数据，您可以轻松定义各种 UI 风格和交互。
 
-[English](https://github.com/bravejs/pagination/blob/main/README.md)
+[English](https://github.com/bravejs/pagination-core/blob/main/README.md)
 | 简体中文
 
 ## 安装
@@ -10,16 +10,16 @@
 使用 npm:
 
 ```
-npm i @bravejs/pagination -S
+npm i pagination-core -S
 ```
 
 ## 语法
 
 ```typescript
-import Pagination from '@bravejs/pagination'
+import PaginationCore from 'pagination-core'
 
 // 创建
-const pagination = new Pagination({
+const pagination = new PaginationCore({
   current: 1,
   total: 100,
   pageSize: 50,
@@ -71,7 +71,7 @@ interface Props extends Options {
 实例和方法
 
 ```typescript
-declare class Pagination {
+declare class PaginationCore {
   pages: number[]; // 页码列表，0 为折叠项
   props: Props; // 实例属性
 

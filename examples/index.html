@@ -7,7 +7,7 @@
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     >
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BraveJS Pagination</title>
+    <title>Pagination core</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -56,7 +56,7 @@
   const listEl = el.children[1]
   const form = document.querySelector('form')
 
-  const pagination = new Pagination({
+  const pagination = new PaginationCore({
     total: 500
   }, update)
 

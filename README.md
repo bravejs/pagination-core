@@ -1,27 +1,27 @@
-# @bravejs/pagination
+# Pagination core
 
 This is the base class for pagination components. It is used to create the most basic data required for pagination
 components, so that it can be applied to any scene or framework. Based on this data, you can easily define various UI
 styles and interactions.
 
 English |
-[简体中文](https://github.com/bravejs/pagination/blob/main/README.zh.md)
+[简体中文](https://github.com/bravejs/pagination-core/blob/main/README.zh.md)
 
 ## Install
 
 Using npm:
 
 ```
-npm i @bravejs/pagination -S
+npm i pagination-core -S
 ```
 
 ## Syntax
 
 ```typescript
-import Pagination from '@bravejs/pagination'
+import PaginationCore from 'pagination-core'
 
 // create
-const pagination = new Pagination({
+const pagination = new PaginationCore({
   current: 1,
   total: 100,
   pageSize: 50,
@@ -70,10 +70,10 @@ interface Props extends Options {
 
 ### Pagination
 
-Pagination instance and methods
+Instance and methods
 
 ```typescript
-declare class Pagination {
+declare class PaginationCore {
   pages: number[]; // List of page numbers, 0 is a collapsed item
   props: Props; // instance properties
 
