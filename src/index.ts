@@ -9,15 +9,17 @@ export interface Props extends Options {
   totalPages: number
 }
 
-export type Callback = (pages: number[], props: Props) => void;
+export type Pages = number[]
+
+export type Callback = (pages: Pages, props: Props) => void;
 
 function getSafeIndex (index: number, totalPages: number) {
   return index < 1 ? 1 : index > totalPages ? totalPages : index
 }
 
 class PaginationCore {
-  pages!: number[]
   props: Props
+  pages!: Pages
 
   private _cb?: Callback
 

@@ -13,91 +13,114 @@
 npm i pagination-core -S
 ```
 
-## 语法
+## 使用
 
 ```typescript
 import PaginationCore from 'pagination-core'
 
-// 创建
-const pagination = new PaginationCore({
-  current: 1,
-  total: 100,
-  pageSize: 50,
-  maxLength: 9
-})
-
-// 使用数据
-pagination.pages.forEach((page) => {
-  console.log(page || '...')
-})
+const instance = new PaginationCore(
+  {
+    current: 1,
+    total: 100,
+    pageSize: 50,
+    maxLength: 9
+  },
+  (pages, props) => {
+    // ...
+  }
+)
 ```
 
 ## 接口
 
-### Options
-
-实例参数选项
+### 选项
 
 ```typescript
 interface Options {
   // 当前页，默认 1
-  current: number;
+  current?: number
 
   // 总条目数量，默认 0
-  total: number;
+  total?: number
 
   // 每页条目数量，默认 50
-  pageSize: number;
+  pageSize?: number
 
   // 最大页码长度, 
   // 当总页数超过该值时会折叠, 
   // 默认为 9
-  maxLength: number;
+  maxLength?: number
 }
 ```
 
-### Props
-
-实例属性，包括所有传入参数
+### 属性
 
 ```typescript
-interface Props extends Options {
-  totalPages: number; // 总页数
+interface Props {
+  // 当前页
+  current: number
+
+  // 总条目数量
+  total: number
+
+  // 每页条目数量
+  pageSize: number
+
+  // 最大页码长度
+  maxLength: number
+
+  // 总页数
+  totalPages: number
 }
 ```
 
-### Pagination
+### 页码列表
 
-实例和方法
+```typescript
+// 页码列表，0 表示为折叠项
+type Pages = number[]
+```
+
+### 实例和方法
 
 ```typescript
 declare class PaginationCore {
-  pages: number[]; // 页码列表，0 为折叠项
-  props: Props; // 实例属性
+  pages: Pages
+  props: Props
 
-  constructor (options: Partial<Options>);
+  /**
+   * 参数
+   * @param options 选项
+   * @param callback 回调函数，每次变化后执行
+   */
+  constructor (
+    options: Options,
+    callback?: (pages: Pages, props: Props) => void
+  )
 
   /**
    * 跳转上一页的方法
    * 如果已经是第一页，该方法执行无效
    */
-  prev (): void;
+  prev (): void
 
   /**
    * 跳转下一页的方法
    * 如果已经是最后一页，该方法执行无效
    */
-  next (): void;
+  next (): void
 
   /**
-   * 跳转到指定页的方法.
+   * 跳转到指定页的方法
    * 如果 `page` 是当前页或者超出范围，该方法执行无效
+   * @param page 页码
    */
-  to (page: number): void;
+  to (page: number): void
 
   /**
-   * 设置或者更新实例参数的方法
+   * 设置或者更新选项的方法
+   * @param options 选项
    */
-  set (options: Partial<Options>): void;
+  set (options: Options): void
 }
 ```

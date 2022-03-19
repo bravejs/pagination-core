@@ -7,10 +7,11 @@ export interface Options {
 export interface Props extends Options {
     totalPages: number;
 }
-export declare type Callback = (pages: number[], props: Props) => void;
+export declare type Pages = number[];
+export declare type Callback = (pages: Pages, props: Props) => void;
 declare class PaginationCore {
-    pages: number[];
     props: Props;
+    pages: Pages;
     private _cb?;
     constructor(options: Partial<Options>, callback?: Callback);
     prev(): void;

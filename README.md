@@ -15,91 +15,114 @@ Using npm:
 npm i pagination-core -S
 ```
 
-## Syntax
+## Usage
 
 ```typescript
 import PaginationCore from 'pagination-core'
 
-// create
-const pagination = new PaginationCore({
-  current: 1,
-  total: 100,
-  pageSize: 50,
-  maxLength: 9
-})
-
-// usage data
-pagination.pages.forEach((page) => {
-  console.log(page || '...')
-})
+const instance = new PaginationCore(
+  {
+    current: 1,
+    total: 100,
+    pageSize: 50,
+    maxLength: 9
+  },
+  (pages, props) => {
+    // ...
+  }
+)
 ```
 
 ## Interface
 
 ### Options
 
-Instance parameter options.
-
 ```typescript
 interface Options {
   // Current page, default 1
-  current: number;
+  current?: number
 
   // Total number of entries, default 0
-  total: number;
+  total?: number
 
   // Number of entries per page, default 50
-  pageSize: number;
+  pageSize?: number
 
   // The maximum number of page numbers, 
   // which will be collapsed when it exceeds this value, 
   // the default is 9
-  maxLength: number;
+  maxLength?: number
 }
 ```
 
 ### Props
 
-Instance properties, including all incoming parameters.
-
 ```typescript
-interface Props extends Options {
-  totalPages: number; // total pages
+interface Props {
+  // Current page
+  current: number
+
+  // Total number of entries
+  total: number
+
+  // Number of entries per page
+  pageSize: number
+
+  // Maximum page number length
+  maxLength: number
+
+  // Total pages
+  totalPages: number
 }
 ```
 
-### Pagination
+### Pages
 
-Instance and methods
+```typescript
+// List of page numbers, 0 is collapsed item
+type Pages = number[]
+```
+
+### Instance and methods
 
 ```typescript
 declare class PaginationCore {
-  pages: number[]; // List of page numbers, 0 is a collapsed item
-  props: Props; // instance properties
+  pages: Pages
+  props: Props
 
-  constructor (options: Partial<Options>);
+  /**
+   * Parameters
+   * @param options
+   * @param callback Execute after each change
+   */
+  constructor (
+    options: Options,
+    callback?: (pages: Pages, props: Props) => void
+  )
 
   /**
    * The method of jumping to the previous page.
    * If it is already the first page, this method is invalid.
    */
-  prev (): void;
+  prev (): void
 
   /**
    * The method of jumping to the next page.
    * If it is already the last page, this method is invalid.
    */
-  next (): void;
+  next (): void
 
   /**
-   * The method of jumping to the specified page.
-   * If the `page` is the current page or is out of range, this method is invalid.
+   * The method of jumping to the specified page
+   * If the `page` is the current page or is out of range, this method is invalid
+   * @param page
    */
-  to (page: number): void;
+  to (page: number): void
 
   /**
    * Methods to set or update instance parameters
+   * @param options
    */
-  set (options: Partial<Options>): void;
+  set (options: Options): void
 }
 ```
